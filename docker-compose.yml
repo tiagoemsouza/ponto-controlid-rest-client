@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  php:
+    build: .    
+    container_name: php74_cli
+    # monte seu código no /app (opcional)
+    volumes:
+      - ./:/app:cached
+    working_dir: /app
+    tty: true # mantém o TTY aberto
+    stdin_open: true # permite 'docker exec -it' e manter stdin    

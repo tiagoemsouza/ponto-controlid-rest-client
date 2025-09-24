@@ -1,0 +1,35 @@
+{
+    "name": "tiagoemsouza/ponto-controlid-rest-client",
+    "description": "Rest client for ControlId API",
+    "type": "library",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "7.*",
+        "spatie/data-transfer-object": "2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.5",
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpstan/phpstan": "^1.6",
+        "timeweb/phpstan-enum": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "tiagoemsouza\\ControlIdAPI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tiagoemsouza\\ControlIdAPI\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=PSR2 --colors -p src/ tests/",
+        "phpcbf": "phpcbf --standard=PSR2 --colors -p src/ tests/",
+        "phpstan": "vendor/bin/phpstan",
+        "coverage": "phpunit --colors=always --bootstrap=tests/bootstrap.php --configuration=phpunit.xml --coverage-html=tmp/_reports/coverage/",
+        "test": "phpunit --colors=always --bootstrap=tests/bootstrap.php --configuration=phpunit.xml"
+    }
+}
