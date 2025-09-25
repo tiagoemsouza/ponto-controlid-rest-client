@@ -10,5 +10,5 @@ class RegistroMarcacao extends FlexibleDataTransferObject
 {
     public string $nsr;
     public DateTime $marcacao;
-    public string $pis;
+    public string $codigo;
 }

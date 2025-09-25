@@ -31,14 +31,13 @@ class ControlIdAPITest extends TestCase
         if ($contents === false) {
             return [];
         }
-        $isBase64 = preg_match('/^data:text\/plain;base64,(.*)/m', $contents, $matches);
-
-        if (!$isBase64) {
-            $data = json_decode($contents, true);
-        } else {
-            $data['data'] = $matches[1];
-        }
         
+        $data = json_decode($contents, true);
+
+        if($data === null){
+            $data['data'] = $contents;
+        }
+
         return $data;
     }
 }

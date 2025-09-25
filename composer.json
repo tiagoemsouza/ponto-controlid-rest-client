@@ -1,6 +1,7 @@
 {
     "name": "tiagoemsouza/ponto-controlid-rest-client",
     "description": "Rest client for ControlId API",
+    "version": "1.0.0",
     "type": "library",
     "minimum-stability": "stable",
     "license": "MIT",

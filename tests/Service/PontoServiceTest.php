@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace tiagoemsouza\ControlIdAPI\Tests\Service;
 
+use DateTime;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use tiagoemsouza\ControlIdAPI\Adapter\Adapter;
-use tiagoemsouza\ControlIdAPI\Entity\RegistroMarcacao;
 use tiagoemsouza\ControlIdAPI\Entity\RelatorioArquivoReguladoPorLei;
-use tiagoemsouza\ControlIdAPI\Exception\ForbiddenException;
 use tiagoemsouza\ControlIdAPI\Service\PontoService;
-use tiagoemsouza\ControlIdAPI\Service\UsuarioService;
 use tiagoemsouza\ControlIdAPI\Tests\ControlIdAPITest;
 
 final class PontoServiceTest extends ControlIdAPITest
@@ -33,27 +31,16 @@ final class PontoServiceTest extends ControlIdAPITest
     public function test(): void
     {
         $body = <<<EOT
-            data:text/plain;base64,MDAwMDAwMDAwMTEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCAgIC
-            AgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA
-            gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-            ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDBCUjUxMjAyMDAwMTIwMi03MjYwNTIwMjIyN
-            jA1MjAyMjA5MDYyMDIyMTQ1MAowMDMxNDc4MjYzMjYwNTIwMjIxNDUwMDczODg3NzQ1NjE1CjAwMz
-            E1MTMxOTMyNjA1MjAyMjE3NTYwNzM4ODc3NDU2MTUKOTk5OTk5OTk5MDAwMDAwMDAwMDAwMDAwMDA
-            yMDAwMDAwMDAwMDAwMDAwMDAwOQo=
+            000000000110000000000000000000000000000ControliD                                                                                                                                             066130470450119702025-09-242025-09-252025-09-25T15:11:00-0300003108238299000129                              5753
+            00000039132025-09-24T13:32:00-0300004784026940DA3D
+            9999999990000000000000004330000000000000000000000000000000000009
+            0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
         EOT;
         $this->mock->append(new Response(200, [], $body));
 
-        $dataFim = "2022-05-26T23:59:59.999Z";
-        $dataInicio = "2022-05-26T07:00:00.000Z";
-        $somenteAtivos = false;
-        $tipo = "AFD";
+        $dataInicio = new DateTime('2025-09-23');
 
-        $relatorioArquivoReguladoPorLei = $this->pontoService->relatorioReguladorPorlei(
-            $dataInicio,
-            $dataFim,
-            $somenteAtivos,
-            $tipo
-        );
+        $relatorioArquivoReguladoPorLei = $this->pontoService->relatorioAfd671($dataInicio);
         
         $this->assertInstanceOf(RelatorioArquivoReguladoPorLei::class, $relatorioArquivoReguladoPorLei);
     }
